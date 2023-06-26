@@ -7,3 +7,18 @@ updates:
     schedule:
       # by default this will be on a monday.
       interval: "weekly"
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: daily
+
+  - package-ecosystem: gomod
+    directory: /
+    schedule:
+      interval: daily
+
+  - package-ecosystem: gomod
+    directory: /tests/azure
+    schedule:
+      interval: daily

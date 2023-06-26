@@ -15,6 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && github.actor != 'dependabot[bot]'
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@55d479fb1c5bcad5a4f9099a5d9f37c8857b2845 # v2.4.1
+        with:
+          egress-policy: audit
+
       - name: Checkout
         uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
       - name: Setup Go
@@ -34,7 +39,7 @@ jobs:
           node_image: kindest/node:v1.26.0
           kubectl_version: v1.26.2
       - name: Setup Kustomize
-        uses: fluxcd/pkg/actions/kustomize@main
+        uses: fluxcd/pkg/actions/kustomize@4443dd849001c86b23f931a0163161473b44db47 # main
       - name: Build
         run: |
           make cmd/flux/.manifests.done
